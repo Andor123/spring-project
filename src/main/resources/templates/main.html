@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.com">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="#{app.title}"></title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" href="../static/css/login.css" />
+</head>
+<body>
+  
+  <div class="content">
+  
+    <header>
+      <h1 th:text="#{main.heading}"></h1>
+      <h2 th:text="#{main.heading2}"></h2>
+    </header>
+    
+    <nav>
+      <ul>
+        <li><a th:href="@{/football}" th:text="#{main.nav.li1}"></a></li>
+        <li><a th:href="@{/basketball}" th:text="#{main.nav.li2}"></a></li>
+        <li><a th:href="@{/motorsport}" th:text="#{main.nav.li3}"></a></li>
+      </ul>
+    </nav>
+    
+    <section>
+      <h1 th:text="#{main.section}"></h1>
+      <h3 th:text="#{main.section2}"></h3>
+    </section>
+    
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.com">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="#{app.title}"></title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" href="../static/css/login.css" />
+</head>
+<body>
+  
+  <div class="content">
+  
+    <header>
+      <h1 th:text="#{main.heading}"></h1>
+      <h2 th:text="#{main.heading2}"></h2>
+    </header>
+    
+    <nav>
+      <ul>
+        <li><a th:href="@{/main}" th:text="#{main.nav.li4}"></a></li>
+      </ul>
+    </nav>
+    
+    <section th:tag="remove" th:unless="${#lists.isEmpty(footballResults)}">
+      <h1 th:text="#{football.section}"></h1>
+      <table align="center" border="1">
+        <thead>
+          <tr>
+            <th th:text="#{football.table1}"></th>
+            <th th:text="#{football.table2}"></th>
+            <th th:text="#{football.table3}"></th>
+            <th th:text="#{football.table4}"></th>
+            <th th:text="#{football.table5}"></th>
+          </tr>
+        </thead>
+        <tbody th:each="football: ${footballResults}">
+          <tr>
+            <td th:text="${football.league}"></td>
+            <td th:text="${football.date}"></td>
+            <td th:text="${football.teamName1}"></td>
+            <td th:text="${football.teamName2}"></td>
+            <td th:text="${football.result}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+  </div>
+  
+</body>
+</html>
