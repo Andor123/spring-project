@@ -12,5 +12,8 @@ public interface BasketballService {
 	
 	@NotNull
 	List<Basketball> getBasketballResults();
+	
+	@NotNull
+	List<Basketball> getBasketballFixtures();
 
 }

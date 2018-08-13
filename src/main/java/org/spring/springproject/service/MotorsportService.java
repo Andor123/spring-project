@@ -12,5 +12,8 @@ public interface MotorsportService {
 	
 	@NotNull
 	List<Motorsport> getMotorsportResults();
+	
+	@NotNull
+	List<Motorsport> getMotorsportFixtures();
 
 }

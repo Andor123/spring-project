@@ -2,6 +2,7 @@ package org.spring.springproject.repository.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -36,10 +37,21 @@ public class MotorsportRepositoryImpl implements MotorsportRepository {
 	};
 
 	@Override
-	public @NotNull List<Motorsport> getMotorsportResultsFromDatabase() {
-		final String sql = "SELECT championship, grandPrix, raceDate, driverName, teamName, winningTime FROM MOTORSPORT";
+	public @NotNull List<Motorsport> getMotorsportResultsFromDatabase(@NotNull LocalDate fromTime,
+			@NotNull LocalDate toTime) {
+		final String sql = "SELECT championship, grandPrix, raceDate, driverName, teamName, winningTime FROM MOTORSPORT "
+				+ "WHERE raceDate >= ? AND raceDate <= ? AND winningTime IS NOT NULL";
 		
-		return jdbctemplate.query(sql, mapper);
+		return jdbctemplate.query(sql, mapper, fromTime, toTime);
+	}
+
+	@Override
+	public @NotNull List<Motorsport> getMotorsportFixturesFromDatabase(@NotNull LocalDate fromTime,
+			@NotNull LocalDate toTime) {
+		final String sql = "SELECT championship, grandPrix, raceDate, driverName, teamName, winningTime FROM MOTORSPORT "
+				+ "WHERE raceDate >= ? AND raceDate <= ? AND winningTime IS NULL";
+		
+		return jdbctemplate.query(sql, mapper, fromTime, toTime);
 	}
 
 }

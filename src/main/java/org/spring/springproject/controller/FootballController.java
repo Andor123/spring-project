@@ -15,6 +15,7 @@ public class FootballController {
 	@GetMapping("/football")
 	public String getFootball(Model model) {
 		model.addAttribute("footballResults", footballService.getFootballResults());
+		model.addAttribute("footballFixtures", footballService.getFootballFixtures());
 		return "football";
 	}
 	

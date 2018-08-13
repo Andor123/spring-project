@@ -2,6 +2,7 @@ package org.spring.springproject.repository.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -35,10 +36,21 @@ public class BasketballRepositoryImpl implements BasketballRepository {
 	};
 
 	@Override
-	public @NotNull List<Basketball> getBasketballResultsFromDatabase() {
-		final String sql = "SELECT league, matchDate, teamName1, teamName2, result FROM BASKETBALL";
+	public @NotNull List<Basketball> getBasketballResultsFromDatabase(@NotNull LocalDate fromTime,
+			@NotNull LocalDate toTime) {
+		final String sql = "SELECT league, matchDate, teamName1, teamName2, result FROM BASKETBALL "
+				+ "WHERE matchDate >= ? AND matchDate <= ? AND result IS NOT NULL";
 		
-		return jdbctemplate.query(sql, mapper);
+		return jdbctemplate.query(sql, mapper, fromTime, toTime);
+	}
+
+	@Override
+	public @NotNull List<Basketball> getBasketballFixturesFromDatabase(@NotNull LocalDate fromTime,
+			@NotNull LocalDate toTime) {
+		final String sql = "SELECT league, matchDate, teamName1, teamName2, result FROM BASKETBALL "
+				+ "WHERE matchDate >= ? AND matchDate <= ? AND result IS NULL";
+		
+		return jdbctemplate.query(sql, mapper, fromTime, toTime);
 	}
 
 }

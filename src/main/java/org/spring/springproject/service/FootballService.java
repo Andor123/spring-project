@@ -12,5 +12,8 @@ public interface FootballService {
 	
 	@NotNull
 	List<Football> getFootballResults();
+	
+	@NotNull
+	List<Football> getFootballFixtures();
 
 }

@@ -44,6 +44,28 @@
       </table>
     </section>
     
+    <section th:tag="remove" th:unless="${#lists.isEmpty(footballFixtures)}">
+      <h1 th:text="#{football.section2}"></h1>
+      <table align="center" border="1">
+        <thead>
+          <tr>
+            <th th:text="#{football.table1}"></th>
+            <th th:text="#{football.table2}"></th>
+            <th th:text="#{football.table3}"></th>
+            <th th:text="#{football.table4}"></th>
+          </tr>
+        </thead>
+        <tbody th:each="football: ${footballFixtures}">
+          <tr>
+            <td th:text="${football.league}"></td>
+            <td th:text="${football.date}"></td>
+            <td th:text="${football.teamName1}"></td>
+            <td th:text="${football.teamName2}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
   </div>
   
 </body>

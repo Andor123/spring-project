@@ -15,6 +15,7 @@ public class MotorsportController {
 	@GetMapping("/motorsport")
 	public String getMotorsport(Model model) {
 		model.addAttribute("motorsportResults", motorsportService.getMotorsportResults());
+		model.addAttribute("motorsportFixtures", motorsportService.getMotorsportFixtures());
 		return "motorsport";
 	}
 	

@@ -20,7 +20,7 @@
       </ul>
     </nav>
     
-    <section>
+    <section th:tag="remove" th:unless="${#lists.isEmpty(motorsportResults)}">
       <h1 th:text="#{motorsport.section}"></h1>
       <table align="center" border="1">
         <thead>
@@ -41,6 +41,26 @@
             <td th:text="${motorsport.driverName}"></td>
             <td th:text="${motorsport.teamName}"></td>
             <td th:text="${motorsport.winningTime}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <section th:tag="remove" th:unless="${#lists.isEmpty(motorsportFixtures)}">
+      <h1 th:text="#{motorsport.section}"></h1>
+      <table align="center" border="1">
+        <thead>
+          <tr>
+            <th th:text="#{motorsport.table1}"></th>
+            <th th:text="#{motorsport.table2}"></th>
+            <th th:text="#{motorsport.table3}"></th>
+          </tr>
+        </thead>
+        <tbody th:each="motorsport: ${motorsportFixtures}">
+          <tr>
+            <td th:text="${motorsport.championship}"></td>
+            <td th:text="${motorsport.grandPrix}"></td>
+            <td th:text="${motorsport.date}"></td>
           </tr>
         </tbody>
       </table>

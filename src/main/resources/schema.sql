@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS motorsport (
   championship VARCHAR(32) NOT NULL,
   grandPrix VARCHAR(32) NOT NULL,
   raceDate DATE,
-  driverName VARCHAR(32) NOT NULL,
-  teamName VARCHAR(32) NOT NULL,
+  driverName VARCHAR(32) NULL,
+  teamName VARCHAR(32) NULL,
   winningTime VARCHAR(32) NULL
 );

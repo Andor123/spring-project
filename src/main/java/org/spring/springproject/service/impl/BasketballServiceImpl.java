@@ -1,5 +1,6 @@
 package org.spring.springproject.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -18,7 +19,16 @@ public class BasketballServiceImpl implements BasketballService {
 
 	@Override
 	public @NotNull List<Basketball> getBasketballResults() {
-		return repository.getBasketballResultsFromDatabase();
+		final LocalDate today = LocalDate.now();
+		final LocalDate fromDate = today.minusMonths(2);
+		return repository.getBasketballResultsFromDatabase(fromDate, today);
+	}
+
+	@Override
+	public @NotNull List<Basketball> getBasketballFixtures() {
+		final LocalDate today = LocalDate.now();
+		final LocalDate toDate = today.plusMonths(2);
+		return repository.getBasketballFixturesFromDatabase(today, toDate);
 	}
 
 }

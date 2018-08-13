@@ -15,6 +15,7 @@ public class BasketballController {
 	@GetMapping("/basketball")
 	public String getBasketball(Model model) {
 		model.addAttribute("basketballResults", basketballService.getBasketballResults());
+		model.addAttribute("basketballFixtures", basketballService.getBasketballFixtures());
 		return "basketball";
 	}
 	
