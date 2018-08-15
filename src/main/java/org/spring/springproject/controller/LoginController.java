@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class LoginController {
@@ -41,11 +43,18 @@ public class LoginController {
 		logger.debug("user login to app: {}", login);
 		if (result.hasErrors()) {
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			result.reject("loginForm.error.incompleteInput");
 			return LOGIN_FORM;
 		} else {
 			loginService.login(login);
 			return "redirect:/main";
 		}
+	}
+	
+	@ExceptionHandler
+	@ResponseStatus(HttpStatus.CONFLICT)
+	public String loginAlreadyExists(LoginAlreadyExistsException e) {
+		return "error/error-login-already-exists";
 	}
 	
 }

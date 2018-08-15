@@ -12,6 +12,7 @@ import org.spring.springproject.service.exception.LoginAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -22,6 +23,7 @@ public class LoginServiceImpl implements LoginService {
 	private LoginRepository repository;
 	
 	@Override
+	@Transactional(rollbackFor = LoginAlreadyExistsException.class)
 	public void login(@NotNull @Valid Login loginInfo) throws LoginAlreadyExistsException {
 		logger.info("Login: {}", loginInfo);
 		try {
