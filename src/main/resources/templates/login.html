@@ -22,7 +22,7 @@
     
     <label th:text="#{loginForm.password}"></label><br />
     <div class="fieldErrorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-    <input type="password" th:field="*{password}" /><br /><br />
+    <input type="text" th:field="*{password}" /><br /><br />
     
     <div class="formErrorMessage" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></div>
     <button type="submit" th:text="#{loginForm.submit}"></button>

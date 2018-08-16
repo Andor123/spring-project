@@ -38,12 +38,10 @@ public class LoginControllerTest {
 	private static final String FORM_FIELD_NAME = "name";
 
 	private static final String VIEW_LOGIN_FORM = "login";
-	private static final String VIEW_LOGIN_DUPLICATE = "error/error-login-already-exists";
 
 	private static final String CONTENTTYPE_HTML_UTF8 = "text/html;charset=UTF-8";
 
 	private static final String PATH_LOGIN_FORM = "/login";
-	private static final String PATH_MAIN_FORM = "/main";
 
 	@Autowired
 	private MockMvc mvc;
@@ -87,21 +85,6 @@ public class LoginControllerTest {
 				.param(FORM_FIELD_PASSWORD, loginInput.getPassword()));
 	}
 	
-	private void then_theUserIsRedirectedToTheMainPage() throws Exception {
-		result.andDo(print())
-		.andExpect(status().is3xxRedirection())
-		.andExpect(redirectedUrl(PATH_MAIN_FORM));
-	}
-	
-	@Test
-	public void testLoginFormTakesCorrectlySubmittedData() throws Exception {
-		given_theUserIsOnTheLoginPage();
-		Login validLogin = new Login("Salamon Andor", "salamon.andor@gmail.com", "salamonandor1995");
-		when_userSubmitsLoginFormContaining(validLogin);
-		then_loginIsSentToTheService(validLogin);
-		then_theUserIsRedirectedToTheMainPage();
-	}
-	
 	private void then_theRegistrationIsRefusedDueToBadRequest() throws Exception {
 		result.andDo(print())
 		.andExpect(status().isBadRequest())
@@ -129,34 +112,8 @@ public class LoginControllerTest {
 		then_loginIsNotSentToTheService();
 	}
 	
-	private void then_loginIsSentToTheService(final Login login) throws LoginAlreadyExistsException {
-		verify(loginService, times(1)).login(login);
-	}
-	
 	private void then_loginIsNotSentToTheService() throws LoginAlreadyExistsException {
 		verify(loginService, times(0)).login(any());
-	}
-	
-	private void given_aLoginAlreadyExistsWith(String alreadyExistingEmail) throws LoginAlreadyExistsException {
-		doThrow(new LoginAlreadyExistsException(null))
-		.when(loginService)
-		.login(argThat(login -> login.getEmail().equals(alreadyExistingEmail)));
-	}
-	
-	private void then_theUserSeesThatTheEmailAlreadyRegistered() throws Exception {
-		result.andDo(print())
-		.andExpect(status().isConflict())
-		.andExpect(view().name(VIEW_LOGIN_DUPLICATE));
-	}
-	
-	@Test
-	public void testLoginRefusedDueToDuplication() throws Exception {
-		final Login duplicateLogin = new Login("Salamon Andor", "salamon.andor@gmail.com", "salamonandor1995");
-		given_theUserIsOnTheLoginPage();
-		given_aLoginAlreadyExistsWith(duplicateLogin.getEmail());
-		when_userSubmitsLoginFormContaining(duplicateLogin);
-		then_loginIsSentToTheService(duplicateLogin);
-		then_theUserSeesThatTheEmailAlreadyRegistered();
 	}
 
 }
