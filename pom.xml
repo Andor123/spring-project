@@ -8,8 +8,8 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>spring-project</name>
-	<description>Spring Project Web Application</description>
+	<name>sport-app</name>
+	<description>Sport Application</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
