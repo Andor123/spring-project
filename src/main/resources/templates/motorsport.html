@@ -33,8 +33,8 @@
             <th th:text="#{motorsport.table6}"></th>
           </tr>
         </thead>
-        <tbody th:each="motorsport: ${motorsportResults}">
-          <tr>
+        <tbody>
+          <tr th:each="motorsport: ${motorsportResults}">
             <td th:text="${motorsport.championship}"></td>
             <td th:text="${motorsport.grandPrix}"></td>
             <td th:text="${motorsport.date}"></td>
@@ -56,8 +56,8 @@
             <th th:text="#{motorsport.table3}"></th>
           </tr>
         </thead>
-        <tbody th:each="motorsport: ${motorsportFixtures}">
-          <tr>
+        <tbody>
+          <tr th:each="motorsport: ${motorsportFixtures}">
             <td th:text="${motorsport.championship}"></td>
             <td th:text="${motorsport.grandPrix}"></td>
             <td th:text="${motorsport.date}"></td>

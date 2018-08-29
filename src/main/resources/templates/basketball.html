@@ -32,8 +32,8 @@
             <th th:text="#{basketball.table5}"></th>
           </tr>
         </thead>
-        <tbody th:each="basketball: ${basketballResults}">
-          <tr>
+        <tbody>
+          <tr th:each="basketball: ${basketballResults}">
             <td th:text="${basketball.league}"></td>
             <td th:text="${basketball.date}"></td>
             <td th:text="${basketball.teamName1}"></td>
@@ -55,8 +55,8 @@
             <th th:text="#{basketball.table4}"></th>
           </tr>
         </thead>
-        <tbody th:each="basketball: ${basketballFixtures}">
-          <tr>
+        <tbody>
+          <tr th:each="basketball: ${basketballFixtures}">
             <td th:text="${basketball.league}"></td>
             <td th:text="${basketball.date}"></td>
             <td th:text="${basketball.teamName1}"></td>
