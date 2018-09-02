@@ -5,30 +5,17 @@ CREATE TABLE IF NOT EXISTS login (
   password VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS football (
+CREATE TABLE IF NOT EXISTS results (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  league VARCHAR(32) NOT NULL,
-  matchDate DATE,
-  teamName1 VARCHAR(32) NOT NULL,
-  teamName2 VARCHAR(32) NOT NULL,
-  result VARCHAR(32) NULL
-);
-
-CREATE TABLE IF NOT EXISTS basketball (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  league VARCHAR(32) NOT NULL,
-  matchDate DATE,
-  teamName1 VARCHAR(32) NOT NULL,
-  teamName2 VARCHAR(32) NOT NULL,
-  result VARCHAR(32) NULL
-);
-
-CREATE TABLE IF NOT EXISTS motorsport (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  championship VARCHAR(32) NOT NULL,
-  grandPrix VARCHAR(32) NOT NULL,
-  raceDate DATE,
+  sportName VARCHAR(32) NOT NULL,
+  league VARCHAR(32) NULL,
+  championship VARCHAR(32) NULL,
+  grandPrix VARCHAR(32) NULL,
+  matchDate DATE NULL,
+  raceDate DATE NULL,
   driverName VARCHAR(32) NULL,
-  teamName VARCHAR(32) NULL,
+  teamName1 VARCHAR(32) NULL,
+  teamName2 VARCHAR(32) NULL,
+  result VARCHAR(32) NULL,
   winningTime VARCHAR(32) NULL
 );

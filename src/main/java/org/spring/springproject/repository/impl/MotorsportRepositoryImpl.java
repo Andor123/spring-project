@@ -25,11 +25,12 @@ public class MotorsportRepositoryImpl implements MotorsportRepository {
 		@Override
 		public Motorsport mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Motorsport m = new Motorsport();
+			m.setSportName(rs.getString("sportName"));
 			m.setChampionship(rs.getString("championship"));
 			m.setGrandPrix(rs.getString("grandPrix"));
 			m.setDate(rs.getString("raceDate"));
 			m.setDriverName(rs.getString("driverName"));
-			m.setTeamName(rs.getString("teamName"));
+			m.setTeamName1(rs.getString("teamName1"));
 			m.setWinningTime(rs.getString("winningTime"));
 			return m;
 		}
@@ -39,8 +40,8 @@ public class MotorsportRepositoryImpl implements MotorsportRepository {
 	@Override
 	public @NotNull List<Motorsport> getMotorsportResultsFromDatabase(@NotNull LocalDate fromTime,
 			@NotNull LocalDate toTime) {
-		final String sql = "SELECT championship, grandPrix, raceDate, driverName, teamName, winningTime FROM MOTORSPORT "
-				+ "WHERE raceDate >= ? AND raceDate <= ? AND winningTime IS NOT NULL";
+		final String sql = "SELECT sportName, championship, grandPrix, raceDate, driverName, teamName1, winningTime FROM RESULTS "
+				+ "WHERE raceDate >= ? AND raceDate <= ? AND winningTime IS NOT NULL AND sportName = 'Motorsport'";
 		
 		return jdbctemplate.query(sql, mapper, fromTime, toTime);
 	}
@@ -48,8 +49,8 @@ public class MotorsportRepositoryImpl implements MotorsportRepository {
 	@Override
 	public @NotNull List<Motorsport> getMotorsportFixturesFromDatabase(@NotNull LocalDate fromTime,
 			@NotNull LocalDate toTime) {
-		final String sql = "SELECT championship, grandPrix, raceDate, driverName, teamName, winningTime FROM MOTORSPORT "
-				+ "WHERE raceDate >= ? AND raceDate <= ? AND winningTime IS NULL";
+		final String sql = "SELECT sportName, championship, grandPrix, raceDate, driverName, teamName1, winningTime FROM RESULTS "
+				+ "WHERE raceDate >= ? AND raceDate <= ? AND winningTime IS NULL AND sportName = 'Motorsport'";
 		
 		return jdbctemplate.query(sql, mapper, fromTime, toTime);
 	}

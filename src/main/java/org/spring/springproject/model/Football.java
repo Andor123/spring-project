@@ -2,6 +2,7 @@ package org.spring.springproject.model;
 
 public class Football {
 
+	private String sportName;
 	private String league;
 	private String date;
 	private String teamName1;
@@ -11,14 +12,23 @@ public class Football {
 	public Football() {
 		
 	}
-	
-	public Football(String league, String date, String teamName1, String teamName2, String result) {
+
+	public Football(String sportName, String league, String date, String teamName1, String teamName2, String result) {
 		super();
+		this.sportName = sportName;
 		this.league = league;
 		this.date = date;
 		this.teamName1 = teamName1;
 		this.teamName2 = teamName2;
 		this.result = result;
+	}
+
+	public String getSportName() {
+		return sportName;
+	}
+
+	public void setSportName(String sportName) {
+		this.sportName = sportName;
 	}
 
 	public String getLeague() {
@@ -63,8 +73,8 @@ public class Football {
 
 	@Override
 	public String toString() {
-		return "Football [league=" + league + ", date=" + date + ", teamName1=" + teamName1 + ", teamName2=" + teamName2
-				+ ", result=" + result + "]";
+		return "Football [sportName=" + sportName + ", league=" + league + ", date=" + date + ", teamName1=" + teamName1
+				+ ", teamName2=" + teamName2 + ", result=" + result + "]";
 	}
 	
 }

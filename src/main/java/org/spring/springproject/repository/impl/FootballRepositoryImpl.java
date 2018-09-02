@@ -25,6 +25,7 @@ public class FootballRepositoryImpl implements FootballRepository {
 		@Override
 		public Football mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Football f = new Football();
+			f.setSportName(rs.getString("sportName"));
 			f.setLeague(rs.getString("league"));
 			f.setDate(rs.getString("matchdate"));
 			f.setTeamName1(rs.getString("teamName1"));
@@ -38,8 +39,8 @@ public class FootballRepositoryImpl implements FootballRepository {
 	@Override
 	public @NotNull List<Football> getFootballResultsFromDatabase(@NotNull LocalDate fromTime,
 			@NotNull LocalDate toTime) {
-		final String sql = "SELECT league, matchDate, teamName1, teamName2, result FROM FOOTBALL "
-				+ "WHERE matchDate >= ? AND matchDate <= ? AND result IS NOT NULL";
+		final String sql = "SELECT sportName, league, matchDate, teamName1, teamName2, result FROM RESULTS "
+				+ "WHERE matchDate >= ? AND matchDate <= ? AND result IS NOT NULL AND sportName = 'Football'";
 		
 		return jdbctemplate.query(sql, mapper, fromTime, toTime);
 	}
@@ -47,8 +48,8 @@ public class FootballRepositoryImpl implements FootballRepository {
 	@Override
 	public @NotNull List<Football> getFootballFixturesFromDatabase(@NotNull LocalDate fromTime,
 			@NotNull LocalDate toTime) {
-		final String sql = "SELECT league, matchDate, teamName1, teamName2, result FROM FOOTBALL "
-				+ "WHERE matchDate >= ? AND matchDate <= ? AND result IS NULL";
+		final String sql = "SELECT sportName, league, matchDate, teamName1, teamName2, result FROM RESULTS "
+				+ "WHERE matchDate >= ? AND matchDate <= ? AND result IS NULL AND sportName = 'Football'";
 		
 		return jdbctemplate.query(sql, mapper, fromTime, toTime);
 	}
